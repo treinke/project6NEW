@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -349,15 +349,15 @@ namespace GetItDone
         //Remove an event 
         private void eventButtonGeneralHold(object sender, System.EventArgs e)
         {
-            string tempy = ((HyperlinkButton)sender).Content.ToString();
-            tempy = tempy.Substring(tempy.IndexOf(' ')+1);
+            string tempy = ((HyperlinkButton)sender).Content;
+            tempy = tempy.Substring(temp.IndexOf(' ')+1);
             remList.removeEvent(DateTime.Parse(tempy));
         }
 
         //Show details about event when clicked
         private void eventButtonGeneralClick(object sender, System.Windows.RoutedEventArgs e)
         {
-            string tempy = ((HyperlinkButton)sender).Content.ToString();
+            string tempy = ((HyperlinkButton)sender).Content;
             tempy = tempy.Substring(tempy.IndexOf(' ')+1);
             string[] tempy1 = remList.returnEventSeg(DateTime.Parse(tempy));
             Popup container = new Popup();
@@ -373,34 +373,7 @@ namespace GetItDone
                     container.IsOpen = false;
                 };
         }
-        
-        //Connect to the server
-        private Socket ConnectTCP(string host,int port)
-        {
-            string response ="Connect timed out";
-            DnsEndPointhostEntry =new DnsEndPoint(host, port);
-            Socket hostSocket = new Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);
-            SocketAsyncEventArgssocketEventArgs =new SocketAsyncEventArgs();
-            socketEventArgs.RemoteEndPoint = hostEntry;
-            socketEventArgs.Completed += new EventHandler<SocketAsyncEventArgs>(delegate(objects,SocketAsyncEventArgse)
-            {
-                if(e.SocketError ==SocketError.Success){
-                    response ="";
-                }
-                else{
-                    // Retrieve the result of this request 
-                    response = e.SocketError.ToString();
-                    // Ensure the socket is flagged unavailable 
-                    hostSocket = null;
-                }
-                transferDoneFlag.Set();
-            });
-            transferDoneFlag.Reset();
-            hostSocket.ConnectAsync(socketEventArgs);
-            transferDoneFlag.WaitOne(MESSAGE_TIMEOUT_MSECS);
-            return hostSocket;
-        }
-        
+
         //Sync events with the server
         private void syncButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -413,7 +386,6 @@ namespace GetItDone
                 //add reminder if it doesn't already exist
                 //clear events from screen
                 //add event to screen
-            ConnectTCP("sslab01.cs.purdue.edu", 7272);
                 
         }
 
