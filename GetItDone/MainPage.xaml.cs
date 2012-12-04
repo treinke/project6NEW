@@ -373,7 +373,34 @@ namespace GetItDone
                     container.IsOpen = false;
                 };
         }
-
+        
+        //Connect to the server
+        private Socket ConnectTCP(string host,int port)
+        {
+            string response ="Connect timed out";
+            DnsEndPointhostEntry =new DnsEndPoint(host, port);
+            Socket hostSocket = new Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);
+            SocketAsyncEventArgssocketEventArgs =new SocketAsyncEventArgs();
+            socketEventArgs.RemoteEndPoint = hostEntry;
+            socketEventArgs.Completed += new EventHandler<SocketAsyncEventArgs>(delegate(objects,SocketAsyncEventArgse)
+            {
+                if(e.SocketError ==SocketError.Success){
+                    response ="";
+                }
+                else{
+                    // Retrieve the result of this request 
+                    response = e.SocketError.ToString();
+                    // Ensure the socket is flagged unavailable 
+                    hostSocket = null;
+                }
+                transferDoneFlag.Set();
+            });
+            transferDoneFlag.Reset();
+            hostSocket.ConnectAsync(socketEventArgs);
+            transferDoneFlag.WaitOne(MESSAGE_TIMEOUT_MSECS);
+            return hostSocket;
+        }
+        
         //Sync events with the server
         private void syncButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
