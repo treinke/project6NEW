@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -413,6 +413,7 @@ namespace GetItDone
                 //add reminder if it doesn't already exist
                 //clear events from screen
                 //add event to screen
+            ConnectTCP("sslab01.cs.purdue.edu", 7272);
                 
         }
 
