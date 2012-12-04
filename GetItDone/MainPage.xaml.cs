@@ -349,15 +349,15 @@ namespace GetItDone
         //Remove an event 
         private void eventButtonGeneralHold(object sender, System.EventArgs e)
         {
-            string tempy = ((HyperlinkButton)sender).Content;
-            tempy = tempy.Substring(temp.IndexOf(' ')+1);
+            string tempy = ((HyperlinkButton)sender).Content.ToString();
+            tempy = tempy.Substring(tempy.IndexOf(' ')+1);
             remList.removeEvent(DateTime.Parse(tempy));
         }
 
         //Show details about event when clicked
         private void eventButtonGeneralClick(object sender, System.Windows.RoutedEventArgs e)
         {
-            string tempy = ((HyperlinkButton)sender).Content;
+            string tempy = ((HyperlinkButton)sender).Content.ToString();
             tempy = tempy.Substring(tempy.IndexOf(' ')+1);
             string[] tempy1 = remList.returnEventSeg(DateTime.Parse(tempy));
             Popup container = new Popup();
