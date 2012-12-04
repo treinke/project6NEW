@@ -349,15 +349,29 @@ namespace GetItDone
         //Remove an event 
         private void eventButtonGeneralHold(object sender, System.EventArgs e)
         {
-            string temp = ((HyperlinkButton)sender).Content;
-            temp = temp.Substring(temp.IndexOf(' ')+1);
-            remList.removeEvent(DateTime.Parse(temp));
+            string tempy = ((HyperlinkButton)sender).Content;
+            tempy = tempy.Substring(temp.IndexOf(' ')+1);
+            remList.removeEvent(DateTime.Parse(tempy));
         }
 
         //Show details about event when clicked
         private void eventButtonGeneralClick(object sender, System.Windows.RoutedEventArgs e)
         {
-            
+            string tempy = ((HyperlinkButton)sender).Content;
+            tempy = tempy.Substring(tempy.IndexOf(' ')+1);
+            remList.removeEvent(DateTime.Parse(temp));
+            Popup container = new Popup();
+            AboutControl temp = new AboutControl();
+            container.Child = temp;
+            container.IsOpen = true;
+            container.VerticalOffset = 100;
+            String aboutInfo = "Authors : \r\n      Theo Reinke\r\n      Chris King\r\n      Larry Schneck\r\n      Jordan Hardwick\r\n";
+            temp.infoBox.Text = aboutInfo;
+            //Close the about page when the x button is clicked
+            temp.closeButton.Click += (s, args) =>
+                {
+                    container.IsOpen = false;
+                };
         }
 
         //Sync events with the server
