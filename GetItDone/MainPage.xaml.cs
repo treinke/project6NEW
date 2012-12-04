@@ -70,7 +70,7 @@ namespace GetItDone
         public void loadEvents()
         {
             LinkedList<Node>.Enumerator looper = remList.loopHelp();
-            while (looper.MoveNext() != false && looper.Current.ToString() != null)
+            while (looper.MoveNext())
             {
                 HyperlinkButton eventButton = new HyperlinkButton();
                 eventButton.Height = 72;
@@ -321,7 +321,9 @@ namespace GetItDone
                     
                     //Write backupString to a file for persistent storage
                     string backupString = remList.returnAll();
-                    
+                    StreamWriter writer = new StreamWriter(new IsolatedStorageFileStream(eFile, FileMode.Append, eventFile));
+                    writer.WriteLine(backupString);
+                    writer.Close();
                     //add button on main screen for event, display title and start time
                     HyperlinkButton eventButton = new HyperlinkButton();
                     eventButton.Height = 72;
