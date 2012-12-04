@@ -359,13 +359,13 @@ namespace GetItDone
         {
             string tempy = ((HyperlinkButton)sender).Content.ToString();
             tempy = tempy.Substring(tempy.IndexOf(' ')+1);
-            tempy = remList.returnEventSeg(DateTime.Parse(tempy));
+            string[] tempy1 = remList.returnEventSeg(DateTime.Parse(tempy));
             Popup container = new Popup();
             AboutControl temp = new AboutControl();
             container.Child = temp;
             container.IsOpen = true;
             container.VerticalOffset = 100;
-            String aboutInfo = "Title:" + tempy[0] + "'\nDescription:" + tempy[1]+ "\nStarts:"+tempy[2]+"\nEnds:"+tempy[3];
+            String aboutInfo = "Title:" + tempy1[0] + "'\nDescription:" + tempy1[1]+ "\nStarts:"+tempy1[2]+"\nEnds:"+tempy1[3];
             temp.infoBox.Text = aboutInfo;
             //Close the about page when the x button is clicked
             temp.closeButton.Click += (s, args) =>
