@@ -365,7 +365,7 @@ namespace GetItDone
             container.Child = temp;
             container.IsOpen = true;
             container.VerticalOffset = 100;
-            String aboutInfo = "Title:" + tempy1[0] + "'\nDescription:" + tempy1[1]+ "\nStarts:"+tempy1[2]+"\nEnds:"+tempy1[3];
+            String aboutInfo = "Title:" + tempy1[0] + "\nDescription:" + tempy1[1]+ "\nStarts:"+tempy1[2]+"\nEnds:"+tempy1[3];
             temp.infoBox.Text = aboutInfo;
             //Close the about page when the x button is clicked
             temp.closeButton.Click += (s, args) =>
