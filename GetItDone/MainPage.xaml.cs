@@ -877,12 +877,12 @@ namespace GetItDone
         string temp = "";
         while(backup.IndexOf("/***/") != -1)
         {
-            temp = backup.Substring(0,(backup.IndexOf("/***/")+4));
+            temp = backup.Substring(0,(backup.IndexOf("/***/")+5));
             //not sure about the use of this here
             DateTime emptyDateTime = new DateTime();
             this.addEvent( emptyDateTime, emptyDateTime, temp, 0, null, null);
             //move the backup forward
-            backup = backup.Remove(0,(backup.IndexOf("/***/")+4));
+            backup = backup.Remove(0,(backup.IndexOf("/***/")+5));
         }
         return;
     }
