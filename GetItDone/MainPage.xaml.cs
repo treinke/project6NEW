@@ -842,6 +842,9 @@ public class EList
         }
         return;
     }
+    public LinkedList<Node>.Enumerator loopHelp(){
+        return eventList.GetEnumerator();
+    }
     private string getExtra(Node temp)
     {
         if (temp.getType() == 1)
