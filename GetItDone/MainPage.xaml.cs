@@ -354,6 +354,7 @@ namespace GetItDone
             string tempy = ((HyperlinkButton)sender).Content.ToString();
             tempy = tempy.Substring(tempy.IndexOf(' ')+1);
             remList.removeEvent(DateTime.Parse(tempy));
+            ScheduledActionService.Remove(((HyperlinkButton)sender).Name.ToString());
         }
 
         //Show details about event when clicked
