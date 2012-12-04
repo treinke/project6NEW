@@ -359,13 +359,13 @@ namespace GetItDone
         {
             string tempy = ((HyperlinkButton)sender).Content;
             tempy = tempy.Substring(tempy.IndexOf(' ')+1);
-            remList.removeEvent(DateTime.Parse(temp));
+            tempy = remList.returnEventSeg(DateTime.Parse(tempy));
             Popup container = new Popup();
             AboutControl temp = new AboutControl();
             container.Child = temp;
             container.IsOpen = true;
             container.VerticalOffset = 100;
-            String aboutInfo = "Authors : \r\n      Theo Reinke\r\n      Chris King\r\n      Larry Schneck\r\n      Jordan Hardwick\r\n";
+            String aboutInfo = "Title:" + tempy[0] + "'\nDescription:" + tempy[1]+ "\nStarts:"+tempy[2]+"\nEnds:"+tempy[3];
             temp.infoBox.Text = aboutInfo;
             //Close the about page when the x button is clicked
             temp.closeButton.Click += (s, args) =>
