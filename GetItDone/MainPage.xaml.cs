@@ -70,7 +70,7 @@ namespace GetItDone
         public void loadEvents()
         {
             LinkedList<Node>.Enumerator looper = remList.loopHelp();
-            while (looper.MoveNext() != null)
+            while (looper.MoveNext() != false && looper.Current.ToString() != null)
             {
                 HyperlinkButton eventButton = new HyperlinkButton();
                 eventButton.Height = 72;
@@ -290,7 +290,7 @@ namespace GetItDone
                     String detail = temp.extraTxt.Text;
 
                     //Connect to server
-                    string response = "Connect timed out";
+                    /*string response = "Connect timed out";
                     DnsEndPoint hostEntry = new DnsEndPoint("sslab01.cs.purdue.edu", 7272);
                     Socket connection = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Udp);
                     SocketAsyncEventArgs socketEventArgs = new SocketAsyncEventArgs();
@@ -309,7 +309,7 @@ namespace GetItDone
                             }
                             
                         });
-
+                    */
 
 
                     //Add the event to the EList linked list
