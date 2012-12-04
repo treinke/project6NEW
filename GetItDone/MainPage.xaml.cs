@@ -276,18 +276,60 @@ namespace GetItDone
             
             temp.OKbtn.Click += (s, args) =>
                 {
+                    //error check number
+                    int error = 0;
                     //Create a new node and add it to the LinkedList
-                    String title = temp.titleTxt.Text;
+                    String title = temp.titleTxt.Text;  //error code 1
+                    if(title == null)
+                    {
+                        error = error * 10;
+                        error = error + 1;
+                    }
+                    else
+                    {
+                        if(title.Length < 1)
+                        {
+                            error = error * 10;
+                            error = error + 1;
+                        }
+                    }
                     String date = temp.dateTxt.Text;
                     String startTimeString = temp.startTimeTxt.Text;
                     String endTimeString = temp.endTimeTxt.Text;
-                    DateTime eventDate = DateTime.ParseExact(date, "dd/mm/yyyy", null);
-                    DateTime startTime = DateTime.ParseExact(startTimeString, "HH:mm", null);
-                    DateTime endTime = DateTime.ParseExact(endTimeString, "HH:mm", null);
+                    DateTime eventDate = new DateTime();
+                    try
+                    {
+                        eventDate = DateTime.ParseExact(date, "dd/mm/yyyy", null);  //error code 2
+                    }
+                    catch (Exception ex)
+                    {
+                        error = error * 10;
+                        error = error + 2; 
+                    }
+                    DateTime startTime = new DateTime();
+                    try
+                    {
+                        startTime = DateTime.ParseExact(startTimeString, "HH:mm", null);  //error code 3
+                    }
+                    catch (Exception ex)
+                    {
+                        error = error * 10;
+                        error = error + 3;
+                    }
+                    DateTime endTime = new DateTime();
+                    try
+                    {
+                        endTime = DateTime.ParseExact(endTimeString, "HH:mm", null);  //error code 4
+                    }
+                    catch (Exception ex)
+                    {
+                        error = error * 10;
+                        error = error + 4;
+                    }
                     DateTime startTimeDate = new DateTime(eventDate.Year, eventDate.Month, eventDate.Day, startTime.Hour, startTime.Minute, 0);
                     DateTime endTimeDate = new DateTime(eventDate.Year, eventDate.Month, eventDate.Day, endTime.Hour, endTime.Minute, 0);
-                    String extra = temp.extraTxt.Text;
-                    String detail = temp.extraTxt.Text;
+                    String extra = temp.extraTxt.Text;  //error code 5
+                    String detail = temp.extraTxt.Text;  //error code 6
 
                     //Add the event to the EList linked list
                     if (remList == null)
