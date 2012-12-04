@@ -289,29 +289,6 @@ namespace GetItDone
                     String extra = temp.extraTxt.Text;
                     String detail = temp.extraTxt.Text;
 
-                    //Connect to server
-                    /*string response = "Connect timed out";
-                    DnsEndPoint hostEntry = new DnsEndPoint("sslab01.cs.purdue.edu", 7272);
-                    Socket connection = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Udp);
-                    SocketAsyncEventArgs socketEventArgs = new SocketAsyncEventArgs();
-                    socketEventArgs.RemoteEndPoint = hostEntry;
-                    socketEventArgs.Completed += new EventHandler<SocketAsyncEventArgs>(delegate(object s2, SocketAsyncEventArgs e2)
-                        {
-                            if (e2.SocketError == SocketError.Success)
-                            {
-                                response = "";
-                            }
-                            else
-                            {
-                                //retrieve the result of the request
-                                response = e2.SocketError.ToString();
-                                connection = null;
-                            }
-                            
-                        });
-                    */
-
-
                     //Add the event to the EList linked list
                     if (remList == null)
                     {
@@ -321,8 +298,8 @@ namespace GetItDone
                     
                     //Write backupString to a file for persistent storage
                     string backupString = remList.returnAll();
-                    StreamWriter writer = new StreamWriter(new IsolatedStorageFileStream(eFile, FileMode.Append, eventFile));
-                    writer.WriteLine(backupString);
+                    StreamWriter writer = new StreamWriter(new IsolatedStorageFileStream(eFile, FileMode.Truncate, eventFile));
+                    writer.Write(backupString);
                     writer.Close();
                     //add button on main screen for event, display title and start time
                     HyperlinkButton eventButton = new HyperlinkButton();
