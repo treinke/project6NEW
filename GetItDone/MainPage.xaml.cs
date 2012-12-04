@@ -303,14 +303,16 @@ namespace GetItDone
         //Remove an event 
         private void eventButtonGeneralHold(object sender, System.EventArgs e)
         {
-
+            string temp = ((HyperlinkButton)sender).Content;
+            temp = temp.Substring(temp.IndexOf(' ')+1);
+            remList.removeEvent(DateTime.Parse(temp));
         }
 
 
         //Show details about event when clicked
         private void eventButtonGeneralClick(object sender, System.Windows.RoutedEventArgs e)
         {
-
+            
         }
 
         private void syncButton_Click(object sender, System.Windows.RoutedEventArgs e)
