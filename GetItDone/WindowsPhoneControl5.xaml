@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="GetItDone.WindowsPhoneControl5"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="630" d:DesignWidth="522">
+    
+    <Grid x:Name="LayoutRoot" Background="Gray">
+        <TextBlock Height="59" HorizontalAlignment="Left" Name="pageTitle" Text="Create an event" VerticalAlignment="Top" Width="528" FontSize="50" TextAlignment="Center" />
+        <TextBox Height="69" HorizontalAlignment="Left" Margin="116,65,0,0" Name="titleTxt" Text="Title" VerticalAlignment="Top" Width="306" TextChanged="titleTxt_TextChanged" GotFocus="titleTxt_GotFocus" LostFocus="titleTxt_LostFocus" />
+        <TextBox Height="69" HorizontalAlignment="Left" Margin="116,140,0,0" Name="startTimeTxt" Text="StartTime(24 hr, hh:mm)" VerticalAlignment="Top" Width="306" GotFocus="titleTxt_GotFocus" LostFocus="titleTxt_LostFocus" />
+        <TextBox Height="69" HorizontalAlignment="Left" Margin="116,215,0,0" Name="endTimeTxt" Text="End Time(24 hr, hh:mm)" VerticalAlignment="Top" Width="306" GotFocus="titleTxt_GotFocus" LostFocus="titleTxt_LostFocus" />
+        <TextBox Height="69" HorizontalAlignment="Left" Margin="116,365,0,0" Name="extraTxt" Text="Extra" VerticalAlignment="Top" Width="306" GotFocus="titleTxt_GotFocus" LostFocus="titleTxt_LostFocus" />
+        <TextBox Height="69" HorizontalAlignment="Left" Margin="116,440,0,0" Name="detailTxt" Text="Details" VerticalAlignment="Top" Width="306" GotFocus="titleTxt_GotFocus" TextChanged="detailTxt_TextChanged" LostFocus="titleTxt_LostFocus" />
+        <Button Content="Cancel" Height="71" HorizontalAlignment="Left" Margin="354,554,0,0" Name="cancelBtn" VerticalAlignment="Top" Width="158" />
+        <Button Content="OK" Height="71" HorizontalAlignment="Left" Margin="200,554,0,0" Name="OKbtn" VerticalAlignment="Top" Width="158" Click="OKbtn_Click" />
+        <TextBox Height="69" HorizontalAlignment="Left" Margin="116,290,0,0" Name="dateTxt" Text="Date(mm/dd/yyyy)" VerticalAlignment="Top" Width="306" GotFocus="titleTxt_GotFocus" LostFocus="titleTxt_LostFocus" />
+    </Grid>
+</UserControl>
