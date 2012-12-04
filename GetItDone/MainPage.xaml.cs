@@ -827,14 +827,13 @@ public class EList
         temp.setRepeat(interval);
         return;
     }
-    public void Recreate(String backup)
+    public void Recreate(string backup)
     {
         //use this to parse the backups into a list again
-        String temp = "";
+        string temp = "";
         while(backup.IndexOf("/***/") != -1)
         {
             temp = backup.Substring(0,(backup.IndexOf("/***/")+4));
-            //temp = backup.SubString(0,(backup.IndexOf("/***/")+4));
             //not sure about the use of this here
             DateTime emptyDateTime = new DateTime();
             this.addEvent( emptyDateTime, emptyDateTime, temp, 0, null, null);
