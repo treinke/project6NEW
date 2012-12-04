@@ -55,11 +55,38 @@ namespace GetItDone
             foreach (var d in arrData)
             {
                 loadListButton(d);//Add the lists to the main screen
-            }           
+            }
             //Read the events in here, add buttons to the display
+            reader = new StreamReader(new IsolatedStorageFileStream(eFile, FileMode.Open, eventFile));
+            string data = reader.ReadToEnd();
+            reader.Close();
+            remList = new EList();
+            remList.Recreate(data);
+            loadEvents();
 
         }
-        
+
+        //Create the buttons on the main page for the events
+        public void loadEvents()
+        {
+            LinkedList<Node>.Enumerator looper = remList.loopHelp();
+            while (looper.MoveNext() != null)
+            {
+                HyperlinkButton eventButton = new HyperlinkButton();
+                eventButton.Height = 72;
+                eventButton.Width = 427;
+                eventButton.Margin = new Thickness(5);
+                eventButton.Background = new SolidColorBrush(Colors.Red);
+                eventButton.Foreground = new SolidColorBrush(Colors.Black);
+                eventButton.Content = looper.Current.getTitle() + " " + looper.Current.getStart();
+                listPanel.Children.Add(eventButton);
+                //Add action handler to display information about event when clicked
+                eventButton.Click += new RoutedEventHandler(eventButtonGeneralClick);
+                //Add action handler to remove the event
+                eventButton.Hold += new EventHandler<System.Windows.Input.GestureEventArgs>(eventButtonGeneralHold);
+            }
+        }
+
         //Create a new list
         private void newListButton_Click(object sender, RoutedEventArgs e)
         {
@@ -217,7 +244,6 @@ namespace GetItDone
 
         }
 
-
         //Show the about page as a pop-up
         private void aboutButton_Click(object sender, RoutedEventArgs e)
         {
@@ -236,6 +262,7 @@ namespace GetItDone
             
         }
 
+        //Create a new event
         private void newEventButton_Click(object sender, RoutedEventArgs e)
         {
             //Get the details from a popup, add the event to the linked list, write the string to the file
@@ -263,8 +290,26 @@ namespace GetItDone
                     String detail = temp.extraTxt.Text;
 
                     //Connect to server
-                    //Socket connection = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Udp);
-                    //connection.Connect("sslab01.cs.purdue.edu", 7272);
+                    string response = "Connect timed out";
+                    DnsEndPoint hostEntry = new DnsEndPoint("sslab01.cs.purdue.edu", 7272);
+                    Socket connection = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Udp);
+                    SocketAsyncEventArgs socketEventArgs = new SocketAsyncEventArgs();
+                    socketEventArgs.RemoteEndPoint = hostEntry;
+                    socketEventArgs.Completed += new EventHandler<SocketAsyncEventArgs>(delegate(object s2, SocketAsyncEventArgs e2)
+                        {
+                            if (e2.SocketError == SocketError.Success)
+                            {
+                                response = "";
+                            }
+                            else
+                            {
+                                //retrieve the result of the request
+                                response = e2.SocketError.ToString();
+                                connection = null;
+                            }
+                            
+                        });
+
 
 
                     //Add the event to the EList linked list
@@ -300,6 +345,7 @@ namespace GetItDone
                     container.IsOpen = false;
                 };
         }
+        
         //Remove an event 
         private void eventButtonGeneralHold(object sender, System.EventArgs e)
         {
@@ -308,13 +354,13 @@ namespace GetItDone
             remList.removeEvent(DateTime.Parse(temp));
         }
 
-
         //Show details about event when clicked
         private void eventButtonGeneralClick(object sender, System.Windows.RoutedEventArgs e)
         {
             
         }
 
+        //Sync events with the server
         private void syncButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             //connect to server
@@ -328,6 +374,7 @@ namespace GetItDone
                 //add event to screen
                 
         }
+
     }
     //Node Class
     public class Node
@@ -657,11 +704,12 @@ namespace GetItDone
     }
 
     //List Class
-    //Coded by lschneck, meant to implement a linked list of event nodes
-//could break if linked list is circular
-//or if move next doesn't return null when i expect
-public class EList
+    public class EList
 {
+    //List Class
+    //Coded by lschneck, meant to implement a linked list of event nodes
+    //could break if linked list is circular
+    //or if move next doesn't return null when i expect
     private LinkedList<Node> eventList;
     private DateTime trash1;
     private DateTime trash2;
