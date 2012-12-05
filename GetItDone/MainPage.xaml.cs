@@ -408,7 +408,7 @@ namespace GetItDone
                     eventButton.Height = 72;
                     eventButton.Width = 427;
                     eventButton.Margin = new Thickness(5);
-                    eventButton.Content = title + " " + startTime.ToString();
+                    eventButton.Content = title + " " + startTimeDate.ToString();
                     eventButton.Background = new SolidColorBrush(Colors.Red);
                     eventButton.Foreground = new SolidColorBrush(Colors.Black);
                     listPanel.Children.Add(eventButton);
