@@ -357,7 +357,7 @@ namespace GetItDone
                         switch (code)
                         {
                             case 1:
-                                errorMessage = String.Concat("Please enter a tittle\n", errorMessage);
+                                errorMessage = String.Concat("Please enter a title\n", errorMessage);
                                 break;
                             case 2:
                                 errorMessage = String.Concat("Invalid date\n", errorMessage);
@@ -417,7 +417,6 @@ namespace GetItDone
                     eventButton.Hold += new EventHandler<System.Windows.Input.GestureEventArgs>(eventButtonGeneralHold);
                     //create a reminder for the event
                     Reminder rem = new Reminder(title);
-                   
                     rem.BeginTime = new DateTime(eventDate.Year, eventDate.Month, eventDate.Day, startTime.Hour, startTime.Minute, 0);
                     rem.Content = detail;
                     ScheduledActionService.Add(rem);
@@ -476,6 +475,20 @@ namespace GetItDone
             client.Connect(address, BACKUP_PORT);
             remList.Recreate(client.Receive());
             client.Close();
+            //recreate the reminders and write to file
+            Reminder rem;
+            LinkedList<Node>.Enumerator looper = remList.loopHelp();
+            while (looper.MoveNext())
+            {
+                rem = new Reminder(looper.Current.getTitle());
+                rem.BeginTime = DateTime.Parse(looper.Current.getStart());
+                rem.Content = looper.Current.getDescription();
+                ScheduledActionService.Add(rem);
+            }
+            string bString = remList.returnAll();
+            StreamWriter writer = new StreamWriter(new IsolatedStorageFileStream(eFile, FileMode.Truncate, eventFile));
+            writer.Write(bString);
+            writer.Close();
         }
         private void uploadButton_Click(object sender, RoutedEventArgs e)
         {
@@ -483,6 +496,7 @@ namespace GetItDone
             const int BACKUP_PORT = 7272;
             SocketClient client = new SocketClient();
             client.Connect(address, BACKUP_PORT);
+            client.Send("");
             client.Send(remList.returnAll());
             client.Close();
         }
