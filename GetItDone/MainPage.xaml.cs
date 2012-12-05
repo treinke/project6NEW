@@ -217,8 +217,8 @@ namespace GetItDone
             //Prompt user to verify
             Popup container = new Popup();
             container.VerticalOffset = 100;
-            container.Height = 300;
-            container.Width = 400;
+            container.Height = 206;
+            container.Width = 427;
             verifyDelete control = new verifyDelete();
             container.Child = control;
             control.textBlock1.Text = "Are you sure you want to delete this list?";
@@ -269,6 +269,8 @@ namespace GetItDone
             container.VerticalOffset = 100;
             String aboutInfo = "Authors : \r\n      Theo Reinke\r\n      Chris King\r\n      Larry Schneck\r\n      Jordan Hardwick\r\n\nDO NOT NAME EVENTS OR LISTS WITH DUPLICATE NAMES!!!";
             temp.infoBox.Text = aboutInfo;
+            temp.infoBox.IsReadOnly = true;
+            temp.Opacity = 10;
             //Close the about page when the x button is clicked
             temp.closeButton.Click += (s, args) =>
                 {
@@ -476,7 +478,7 @@ namespace GetItDone
                 };
         }
 
-        //Sync events with the server
+        //Download events from the server
         private void syncButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             string address = "sslab01.cs.purdue.edu";
@@ -520,6 +522,8 @@ namespace GetItDone
             writer.Write(bString);
             writer.Close();
         }
+
+        //Uploads event to the server
         private void uploadButton_Click(object sender, RoutedEventArgs e)
         {
             string address = "sslab01.cs.purdue.edu";
@@ -1146,6 +1150,7 @@ namespace GetItDone
         return "none";
     }
     }
+    //Socket Class
     public class SocketClient
     {
         Socket _socket = null;

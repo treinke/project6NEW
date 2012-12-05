@@ -9,7 +9,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="206" d:DesignWidth="427" Name="verifyControl">
     
-    <Grid x:Name="LayoutRoot" Background="Gray">
+    <Grid x:Name="LayoutRoot" Background="Gray" MinWidth="150">
         <TextBlock Height="54" HorizontalAlignment="Left" Margin="68,36,0,0" Name="textBlock1" Text="TextBlock" VerticalAlignment="Top" Width="283" />
         <Button Content="Yes" Height="67" HorizontalAlignment="Left" Margin="68,116,0,0" Name="yesButton" VerticalAlignment="Top" Width="136" />
         <Button Content="No" Height="67" HorizontalAlignment="Left" Margin="215,116,0,0" Name="noButton" VerticalAlignment="Top" Width="136" />
