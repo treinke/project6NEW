@@ -476,7 +476,7 @@ namespace GetItDone
             remList.Recreate(client.Receive());
             client.Close();
             //recreate the reminders and write to file
-            Reminder rem;
+            /*Reminder rem;
             LinkedList<Node>.Enumerator looper = remList.loopHelp();
             while (looper.MoveNext())
             {
@@ -488,7 +488,7 @@ namespace GetItDone
             string bString = remList.returnAll();
             StreamWriter writer = new StreamWriter(new IsolatedStorageFileStream(eFile, FileMode.Truncate, eventFile));
             writer.Write(bString);
-            writer.Close();
+            writer.Close();*/
         }
         private void uploadButton_Click(object sender, RoutedEventArgs e)
         {
@@ -496,9 +496,19 @@ namespace GetItDone
             const int BACKUP_PORT = 7272;
             SocketClient client = new SocketClient();
             client.Connect(address, BACKUP_PORT);
-            client.Send("");
-            client.Send(remList.returnAll());
+            client.Send("UpdateInfo|larry|pass|" + remList.returnAll());
             client.Close();
+            //delete local content after pushing to server
+            /*Reminder rem;
+            LinkedList<Node>.Enumerator looper = remList.loopHelp();
+            while (looper.MoveNext())
+            {
+                rem = new Reminder(looper.Current.getTitle());
+                rem.BeginTime = DateTime.Parse(looper.Current.getStart());
+                rem.Content = looper.Current.getDescription();
+                ScheduledActionService.Add(rem);
+            }
+            remList.Recreate("");*/
         }
     }
     //Node Class
