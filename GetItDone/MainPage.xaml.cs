@@ -472,9 +472,11 @@ namespace GetItDone
             string address = "sslab01.cs.purdue.edu";
             const int BACKUP_PORT = 7272;
             SocketClient client = new SocketClient();
+            string tempy;
             client.Connect(address, BACKUP_PORT);
-            client.Send("GetInfo|larry|pass");
-            remList.Recreate(client.Receive());
+            tempy = client.Send("GetInfo|larry|pass");
+            tempy = client.Receive();
+            remList.Recreate(tempy);
             client.Close();
             //recreate the reminders and write to file
             Reminder rem;
@@ -1109,7 +1111,7 @@ namespace GetItDone
     {
         Socket _socket = null;
         static ManualResetEvent _clientDone = new ManualResetEvent(false);
-        const int TIMEOUT_MILLISECONDS = 5000;
+        const int TIMEOUT_MILLISECONDS = 20000;
         const int MAX_BUFFER_SIZE = 2048;
         public SocketClient(){
         }
