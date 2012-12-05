@@ -865,7 +865,7 @@ namespace GetItDone
         trash1 = new DateTime(1, 1, 1, 1, 1, 1);
         trash2 = new DateTime(9, 9, 9, 9, 9, 9);
         Node temp = new Node("EXAMPLE", trash1.ToString(), trash2.ToString());
-        else if (detail == null && type == 0)
+        if (detail == null && type == 0)
         {
             temp = new Node(title, startTime.ToString(), endTime.ToString());
         }
