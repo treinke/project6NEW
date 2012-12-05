@@ -34,6 +34,7 @@ namespace GetItDone
         public MainPage()
         {
             InitializeComponent();
+            Application.Current.Host.Settings.EnableFrameRateCounter = false;
             if (!listFile.FileExists(sFile))//Create a file for storing list names if it doesn't exist
             {
                 IsolatedStorageFileStream dataFile = listFile.CreateFile(sFile);
@@ -79,6 +80,7 @@ namespace GetItDone
                 eventButton.Background = new SolidColorBrush(Colors.Red);
                 eventButton.Foreground = new SolidColorBrush(Colors.Black);
                 string buttonContent1 = looper.Current.getTitle();
+                eventButton.Name = buttonContent1;
                 string buttonContent2 = looper.Current.getStart();
                 string buttonContentFinal = buttonContent1 + " " + buttonContent2;
                 eventButton.Content = buttonContentFinal;
@@ -303,7 +305,7 @@ namespace GetItDone
                     DateTime eventDate = new DateTime();
                     try
                     {
-                        eventDate = DateTime.ParseExact(date, "dd/mm/yyyy", null);  //error code 2
+                        eventDate = DateTime.ParseExact(date, "MM/dd/yyyy", null);  //error code 2
                     }
                     catch (Exception ex)
                     {
@@ -402,6 +404,7 @@ namespace GetItDone
                     writer.Close();
                     //add button on main screen for event, display title and start time
                     HyperlinkButton eventButton = new HyperlinkButton();
+                    eventButton.Name = title;
                     eventButton.Height = 72;
                     eventButton.Width = 427;
                     eventButton.Margin = new Thickness(5);
@@ -414,8 +417,10 @@ namespace GetItDone
                     eventButton.Hold += new EventHandler<System.Windows.Input.GestureEventArgs>(eventButtonGeneralHold);
                     //create a reminder for the event
                     Reminder rem = new Reminder(title);
+                   
                     rem.BeginTime = new DateTime(eventDate.Year, eventDate.Month, eventDate.Day, startTime.Hour, startTime.Minute, 0);
                     rem.Content = detail;
+                    ScheduledActionService.Add(rem);
                     container.IsOpen = false;
                 };
             temp.cancelBtn.Click += (s, args) =>
@@ -430,7 +435,16 @@ namespace GetItDone
             string tempy = ((HyperlinkButton)sender).Content.ToString();
             tempy = tempy.Substring(tempy.IndexOf(' ')+1);
             remList.removeEvent(DateTime.Parse(tempy));
-            ScheduledActionService.Remove(((HyperlinkButton)sender).Name.ToString());
+            if (ScheduledActionService.Find(((HyperlinkButton)sender).Name.ToString()) != null)
+            {
+                ScheduledActionService.Remove(((HyperlinkButton)sender).Name.ToString());
+            }
+            String backup = remList.returnAll();
+            StreamWriter writer = new StreamWriter(new IsolatedStorageFileStream(eFile, FileMode.Truncate, eventFile));
+            writer.Write(backup);
+            writer.Close();
+            listPanel.Children.Remove(((HyperlinkButton)sender));
+
         }
 
         //Show details about event when clicked
