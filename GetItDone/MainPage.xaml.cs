@@ -473,11 +473,11 @@ namespace GetItDone
             const int BACKUP_PORT = 7272;
             SocketClient client = new SocketClient();
             string tempy;
-            client.Connect(address, BACKUP_PORT);
+            tempy = client.Connect(address, BACKUP_PORT);
             tempy = client.Send("GetInfo|larry|pass");
             tempy = client.Receive();
-            remList.Recreate(tempy);
             client.Close();
+            remList.Recreate(tempy);
             //recreate the reminders and write to file
             Reminder rem;
             LinkedList<Node>.Enumerator looper = remList.loopHelp();
@@ -1111,7 +1111,7 @@ namespace GetItDone
     {
         Socket _socket = null;
         static ManualResetEvent _clientDone = new ManualResetEvent(false);
-        const int TIMEOUT_MILLISECONDS = 10000;
+        const int TIMEOUT_MILLISECONDS = 15000;
         const int MAX_BUFFER_SIZE = 2048;
         public SocketClient(){
         }
