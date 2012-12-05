@@ -811,7 +811,7 @@ namespace GetItDone
     }
     public int addEvent(string title)
     {
-        temp = new Node(title);
+        Node temp = new Node(title);
         //add the event into list sorted by startTime
         if (eventList.Count != 0)
         {
