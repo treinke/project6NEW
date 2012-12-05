@@ -476,17 +476,7 @@ namespace GetItDone
             client.Connect(address, BACKUP_PORT);
             remList.Recreate(client.Receive());
             client.Close();
-            //connect to server
-            //check for pending requests
-            //if pending requests
-                //get event string
-                //clear remList
-                //recreate remList from string
-                //add reminder if it doesn't already exist
-                //clear events from screen
-                //add event to screen  
         }
-
         private void uploadButton_Click(object sender, RoutedEventArgs e)
         {
             string address = "lore.cs.purdue.edu";
@@ -1249,6 +1239,9 @@ namespace GetItDone
 
 
 
+
+
+//ALL THIS SHIT IS OUTDATED!!!!!!!!!!!!!!!!!!
 
 /* NOTES and TO-DO
  * -used larry's linked list class to save events
