@@ -1111,7 +1111,7 @@ namespace GetItDone
     {
         Socket _socket = null;
         static ManualResetEvent _clientDone = new ManualResetEvent(false);
-        const int TIMEOUT_MILLISECONDS = 20000;
+        const int TIMEOUT_MILLISECONDS = 5000;
         const int MAX_BUFFER_SIZE = 2048;
         public SocketClient(){
         }
