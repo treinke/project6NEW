@@ -78,7 +78,10 @@ namespace GetItDone
                 eventButton.Margin = new Thickness(5);
                 eventButton.Background = new SolidColorBrush(Colors.Red);
                 eventButton.Foreground = new SolidColorBrush(Colors.Black);
-                eventButton.Content = looper.Current.getTitle() + " " + looper.Current.getStart();
+                string buttonContent1 = looper.Current.getTitle();
+                string buttonContent2 = looper.Current.getStart();
+                string buttonContentFinal = buttonContent1 + " " + buttonContent2;
+                eventButton.Content = buttonContentFinal;
                 listPanel.Children.Add(eventButton);
                 //Add action handler to display information about event when clicked
                 eventButton.Click += new RoutedEventHandler(eventButtonGeneralClick);
@@ -330,6 +333,8 @@ namespace GetItDone
                     DateTime endTimeDate = new DateTime(eventDate.Year, eventDate.Month, eventDate.Day, endTime.Hour, endTime.Minute, 0);
                     String extra = temp.extraTxt.Text;  //error code 5
                     String detail = temp.extraTxt.Text;  //error code 6
+                    System.Console.Write("extra: " + extra);
+                    System.Console.Write("detail: " + detail);
 
                     if(error != 0)
                     {
