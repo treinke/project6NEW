@@ -395,7 +395,7 @@ namespace GetItDone
                     {
                         remList = new EList();
                     }
-                    remList.addEvent(startTimeDate, endTimeDate, title, 0, extra, detail);
+                    remList.addEvent((startTimeDate.ToString()), endTimeDate.ToString(), title, 0, extra, detail);
                     
                     //Write backupString to a file for persistent storage
                     string backupString = remList.returnAll();
