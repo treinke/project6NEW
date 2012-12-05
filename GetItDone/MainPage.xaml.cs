@@ -257,7 +257,7 @@ namespace GetItDone
             container.Child = temp;
             container.IsOpen = true;
             container.VerticalOffset = 100;
-            String aboutInfo = "Authors : \r\n      Theo Reinke\r\n      Chris King\r\n      Larry Schneck\r\n      Jordan Hardwick\r\n";
+            String aboutInfo = "Authors : \r\n      Theo Reinke\r\n      Chris King\r\n      Larry Schneck\r\n      Jordan Hardwick\r\n\nDO NOT NAME EVENTS OR LISTS WITH DUPLICATE NAMES!!!";
             temp.infoBox.Text = aboutInfo;
             //Close the about page when the x button is clicked
             temp.closeButton.Click += (s, args) =>
@@ -1111,7 +1111,7 @@ namespace GetItDone
     {
         Socket _socket = null;
         static ManualResetEvent _clientDone = new ManualResetEvent(false);
-        const int TIMEOUT_MILLISECONDS = 5000;
+        const int TIMEOUT_MILLISECONDS = 10000;
         const int MAX_BUFFER_SIZE = 2048;
         public SocketClient(){
         }
