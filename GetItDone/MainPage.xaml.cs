@@ -804,16 +804,62 @@ namespace GetItDone
     {
         eventList = new LinkedList<Node>();
     }
+    public int addEvent(string title)
+    {
+        temp = new Node(title);
+        //add the event into list sorted by startTime
+        if (eventList.Count != 0)
+        {
+            int j = 0;
+            LinkedList<Node>.Enumerator e = eventList.GetEnumerator();
+            while (e.MoveNext() && j != 1)
+            {
+                trash1 = DateTime.Parse(temp.getStart());
+                trash2 = DateTime.Parse(e.Current.getStart());
+                if (trash1 <= trash2)
+                {
+                    //check the end time
+                    if (!e.Current.checkRepeat(temp.getStart(), temp.getEnd()))
+                    {
+                        return -1;
+                    }
+                    //add to non-first and non-last point in list
+                    trash1 = DateTime.Parse(e.Current.getStart());
+                    trash2 = DateTime.Parse(eventList.First.Value.getStart());
+                    if (trash1 != trash2)
+                    {
+                        eventList.AddBefore(eventList.Find(e.Current), temp);
+                    }
+                    else
+                    {
+                        //add to first point in list
+                        eventList.AddFirst(temp);
+                    }
+                    j = 1;
+                }
+            }
+            if (j != 1)
+            {
+                //add to end of list and check the end time
+                if (!e.Current.checkRepeat(temp.getStart(), temp.getEnd()))
+                {
+                    return -1;
+                }
+                eventList.AddLast(temp);
+            }
+        }
+        else
+        {
+            eventList.AddFirst(temp);
+        }
+        return 1;  
+    }
     public int addEvent(DateTime startTime, DateTime endTime, string title, int type, string extra, string detail)
     {
         //create event based on given data
         trash1 = new DateTime(1, 1, 1, 1, 1, 1);
         trash2 = new DateTime(9, 9, 9, 9, 9, 9);
         Node temp = new Node("EXAMPLE", trash1.ToString(), trash2.ToString());
-        if (title != null && startTime == null) 
-        {
-            temp = new Node(title);
-        }
         else if (detail == null && type == 0)
         {
             temp = new Node(title, startTime.ToString(), endTime.ToString());
@@ -971,10 +1017,7 @@ namespace GetItDone
         while(backup.IndexOf("/***/") != -1)
         {
             temp = backup.Substring(0,(backup.IndexOf("/***/")+5));
-            //not sure about the use of this here
-            DateTime emptyDateTime = new DateTime();
-            this.addEvent( emptyDateTime, emptyDateTime, temp, 0, null, null);
-            //move the backup forward
+            this.addEvent(temp);
             backup = backup.Remove(0,(backup.IndexOf("/***/")+5));
         }
         return;
