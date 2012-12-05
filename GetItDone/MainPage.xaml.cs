@@ -268,6 +268,8 @@ namespace GetItDone
         //Create a new event
         private void newEventButton_Click(object sender, RoutedEventArgs e)
         {
+            //error check number
+            int error = 0;
             //Get the details from a popup, add the event to the linked list, write the string to the file
             Popup container = new Popup();
             container.Height = 300;
@@ -279,8 +281,7 @@ namespace GetItDone
             
             temp.OKbtn.Click += (s, args) =>
                 {
-                    //error check number
-                    int error = 0;
+                    
                     //Create a new node and add it to the LinkedList
                     String title = temp.titleTxt.Text;  //error code 1
                     if(title == null)
