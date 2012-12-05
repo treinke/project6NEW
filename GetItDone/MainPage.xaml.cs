@@ -34,6 +34,14 @@ namespace GetItDone
         public MainPage()
         {
             InitializeComponent();
+            //connect to the server and create a user
+            string address = "sslab01.cs.purdue.edu";
+            const int BACKUP_PORT = 7272;
+            SocketClient client = new SocketClient();
+            client.Connect(address, BACKUP_PORT);
+            client.Send("CreateNewUser|larry|pass|");
+            client.Close();
+
             Application.Current.Host.Settings.EnableFrameRateCounter = false;
             if (!listFile.FileExists(sFile))//Create a file for storing list names if it doesn't exist
             {
@@ -487,6 +495,23 @@ namespace GetItDone
                 rem.BeginTime = DateTime.Parse(looper.Current.getStart());
                 rem.Content = looper.Current.getDescription();
                 ScheduledActionService.Add(rem);
+                //need to add buttons to main screen
+                HyperlinkButton eventButton = new HyperlinkButton();
+                eventButton.Height = 72;
+                eventButton.Width = 427;
+                eventButton.Margin = new Thickness(5);
+                eventButton.Background = new SolidColorBrush(Colors.Red);
+                eventButton.Foreground = new SolidColorBrush(Colors.Black);
+                string buttonContent1 = looper.Current.getTitle();
+                eventButton.Name = buttonContent1;
+                string buttonContent2 = looper.Current.getStart();
+                string buttonContentFinal = buttonContent1 + " " + buttonContent2;
+                eventButton.Content = buttonContentFinal;
+                listPanel.Children.Add(eventButton);
+                //Add action handler to display information about event when clicked
+                eventButton.Click += new RoutedEventHandler(eventButtonGeneralClick);
+                //Add action handler to remove the event
+                eventButton.Hold += new EventHandler<System.Windows.Input.GestureEventArgs>(eventButtonGeneralHold);
             }
             string bString = remList.returnAll();
             StreamWriter writer = new StreamWriter(new IsolatedStorageFileStream(eFile, FileMode.Truncate, eventFile));
@@ -509,6 +534,18 @@ namespace GetItDone
                 if (ScheduledActionService.Find(looper.Current.getTitle()) != null)
                 {
                     ScheduledActionService.Remove(looper.Current.getTitle());
+                    //need to remove buttons from main screen
+                    string buttonName = looper.Current.getTitle();
+                    HyperlinkButton buttonRep;
+                    IEnumerator<UIElement> enumTemp = listPanel.Children.GetEnumerator();
+                    while (enumTemp.MoveNext())
+                    {
+                        if (((HyperlinkButton)enumTemp.Current).Name == buttonName)
+                        {
+                            buttonRep = ((HyperlinkButton)enumTemp.Current);
+                            listPanel.Children.Remove(buttonRep);
+                        }
+                    }
                 }
             }
             remList.Recreate("");
