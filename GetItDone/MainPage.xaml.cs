@@ -874,8 +874,10 @@ namespace GetItDone
         eventList.AddFirst(temp);
         return 1; 
     }
-    public int addEvent(DateTime startTime, DateTime endTime, string title, int type, string extra, string detail)
+    public int addEvent(string istartTime, string iendTime, string title, int type, string extra, string detail)
     {
+        DateTime startTime = DateTime.Parse(istartTime);
+        DateTime endTime = DateTime.Parse(iendTime);
         //create event based on given data
         trash1 = new DateTime(1, 1, 1, 1, 1, 1);
         trash2 = new DateTime(9, 9, 9, 9, 9, 9);
