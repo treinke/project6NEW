@@ -470,7 +470,7 @@ namespace GetItDone
         //Sync events with the server
         private void syncButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            string address ="lore.cs.purdue.edu";
+            string address = "sslab01.cs.purdue.edu";
             const int BACKUP_PORT = 7272;
             SocketClient client = new SocketClient();
             client.Connect(address, BACKUP_PORT);
@@ -479,7 +479,7 @@ namespace GetItDone
         }
         private void uploadButton_Click(object sender, RoutedEventArgs e)
         {
-            string address = "lore.cs.purdue.edu";
+            string address = "sslab01.cs.purdue.edu";
             const int BACKUP_PORT = 7272;
             SocketClient client = new SocketClient();
             client.Connect(address, BACKUP_PORT);
