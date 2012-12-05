@@ -763,7 +763,7 @@ namespace GetItDone
         {
             temp = new Node(title);
         }
-        else if (detail.Equals(null) && type == 0)
+        else if (detail == null && type == 0)
         {
             temp = new Node(title, startTime.ToString(), endTime.ToString());
         }
@@ -771,7 +771,7 @@ namespace GetItDone
         {
             temp = new Node(title, detail, startTime.ToString(), endTime.ToString());
         }
-        else if (detail.Equals(null))
+        else if (detail == null)
         {
             temp = new Node(title, startTime.ToString(), endTime.ToString(), type, extra);
         }
