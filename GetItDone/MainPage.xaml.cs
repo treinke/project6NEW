@@ -475,7 +475,6 @@ namespace GetItDone
             SocketClient client = new SocketClient();
             client.Connect(address, BACKUP_PORT);
             client.Send(remList.returnAll());
-            client.Receive();
             client.Close();
             //connect to server
             //check for pending requests
@@ -490,7 +489,12 @@ namespace GetItDone
 
         private void uploadButton_Click(object sender, RoutedEventArgs e)
         {
-
+            string address = "lore.cs.purdue.edu";
+            const int BACKUP_PORT = 7272;
+            SocketClient client = new SocketClient();
+            client.Connect(address, BACKUP_PORT);
+            client.Receive();
+            client.Close();
         }
     }
     //Node Class
