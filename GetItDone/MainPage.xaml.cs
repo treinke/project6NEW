@@ -331,6 +331,57 @@ namespace GetItDone
                     String extra = temp.extraTxt.Text;  //error code 5
                     String detail = temp.extraTxt.Text;  //error code 6
 
+                    if(error != 0)
+                    {
+                    Popup fixError = new Popup();
+                    AboutControl page = new AboutControl();
+                    fixError.Height = 300;
+                    fixError.Width = 400;
+                    fixError.VerticalOffset = 100;
+                    fixError.Child = page;
+                    fixError.IsOpen = true;
+                    string errorMessage = "";
+                    int code;
+                    while (error > 0)
+                    {
+                        code = error % 10;
+                        error = error / 10;
+                        switch (code)
+                        {
+                            case 1:
+                                errorMessage = String.Concat("Please enter a tittle\n", errorMessage);
+                                break;
+                            case 2:
+                                errorMessage = String.Concat("Invalid date\n", errorMessage);
+                                break;
+                            case 3:
+                                errorMessage = String.Concat("Invalid start time\n", errorMessage);
+                                break;
+                            case 4:
+                                errorMessage = String.Concat("Invalid end time\n", errorMessage);
+                                break;
+                            case 5:
+                                errorMessage = String.Concat("Invalid info\n", errorMessage);
+                                break;
+                            case 6:
+                                errorMessage = String.Concat("Invalid description\n", errorMessage);
+                                break;
+                            default:
+                                errorMessage = String.Concat("Unkown error\n", errorMessage);
+                                break;
+                        }
+                    }
+                    page.infoBox.Text = errorMessage;
+                    page.closeButton.Click += (s1, args1) =>
+                        {
+                            fixError.IsOpen = false;
+                        };
+                    container.IsOpen = false;
+                    return;
+                    }
+                    
+                            
+
                     //Add the event to the EList linked list
                     if (remList == null)
                     {
