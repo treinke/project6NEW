@@ -487,6 +487,11 @@ namespace GetItDone
                 //clear events from screen
                 //add event to screen  
         }
+
+        private void uploadButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
     //Node Class
     public class Node
