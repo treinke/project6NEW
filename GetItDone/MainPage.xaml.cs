@@ -474,7 +474,7 @@ namespace GetItDone
             const int BACKUP_PORT = 7272;
             SocketClient client = new SocketClient();
             client.Connect(address, BACKUP_PORT);
-            client.Send(remList.returnAll());
+            remList.Recreate(client.Receive());
             client.Close();
             //connect to server
             //check for pending requests
@@ -493,7 +493,7 @@ namespace GetItDone
             const int BACKUP_PORT = 7272;
             SocketClient client = new SocketClient();
             client.Connect(address, BACKUP_PORT);
-            client.Receive();
+            client.Send(remList.returnAll());
             client.Close();
         }
     }
