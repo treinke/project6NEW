@@ -217,6 +217,8 @@ namespace GetItDone
             //Prompt user to verify
             Popup container = new Popup();
             container.VerticalOffset = 100;
+            container.Height = 300;
+            container.Width = 400;
             verifyDelete control = new verifyDelete();
             container.Child = control;
             control.textBlock1.Text = "Are you sure you want to delete this list?";
@@ -1148,7 +1150,7 @@ namespace GetItDone
     {
         Socket _socket = null;
         static ManualResetEvent _clientDone = new ManualResetEvent(false);
-        const int TIMEOUT_MILLISECONDS = 15000;
+        const int TIMEOUT_MILLISECONDS = 60000;
         const int MAX_BUFFER_SIZE = 2048;
         public SocketClient(){
         }
