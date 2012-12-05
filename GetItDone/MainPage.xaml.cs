@@ -823,7 +823,6 @@ namespace GetItDone
             return this;
         }
     }
-
     //List Class
     public class EList
 {
