@@ -834,11 +834,13 @@ namespace GetItDone
                     if (trash1 != trash2)
                     {
                         eventList.AddBefore(eventList.Find(e.Current), temp);
+                        return 1;
                     }
                     else
                     {
                         //add to first point in list
                         eventList.AddFirst(temp);
+                        return 1;
                     }
                     j = 1;
                 }
@@ -851,11 +853,13 @@ namespace GetItDone
                     return -1;
                 }
                 eventList.AddLast(temp);
+                return 1;
             }
         }
         else
         {
             eventList.AddFirst(temp);
+            return 1;
         }
         return 1;  
     }
@@ -903,11 +907,13 @@ namespace GetItDone
                     if (trash1 != trash2)
                     {
                         eventList.AddBefore(eventList.Find(e.Current), temp);
+                        return 1;
                     }
                     else
                     {
                         //add to first point in list
                         eventList.AddFirst(temp);
+                        return 1;
                     }
                     j = 1;
                 }
@@ -920,11 +926,13 @@ namespace GetItDone
                     return -1;
                 }
                 eventList.AddLast(temp);
+                return 1;
             }
         }
         else
         {
             eventList.AddFirst(temp);
+            return 1;
         }
         return 1;
     }
