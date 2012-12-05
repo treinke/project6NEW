@@ -536,16 +536,16 @@ namespace GetItDone
                     ScheduledActionService.Remove(looper.Current.getTitle());
                     //need to remove buttons from main screen
                     string buttonName = looper.Current.getTitle();
-                    HyperlinkButton buttonRep;
+                    HyperlinkButton buttonRep = new HyperlinkButton();
                     IEnumerator<UIElement> enumTemp = listPanel.Children.GetEnumerator();
                     while (enumTemp.MoveNext())
                     {
-                        if (((HyperlinkButton)enumTemp.Current).Name == buttonName)
+                        if (((HyperlinkButton)enumTemp.Current).Name.ToString() == buttonName)
                         {
                             buttonRep = ((HyperlinkButton)enumTemp.Current);
-                            listPanel.Children.Remove(buttonRep);
                         }
                     }
+                    listPanel.Children.Remove(buttonRep);
                 }
             }
             remList.Recreate("");
