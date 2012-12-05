@@ -1054,6 +1054,7 @@ namespace GetItDone
     {
         //use this to parse the backups into a list again
         string temp = "";
+        eventList = new LinkedList<Node>();
         while(backup.IndexOf("/***/") != -1)
         {
             temp = backup.Substring(0,(backup.IndexOf("/***/")+5));
