@@ -395,7 +395,7 @@ namespace GetItDone
                     {
                         remList = new EList();
                     }
-                    remList.addEvent(startTime, endTime, title, 0, extra, detail);
+                    remList.addEvent(startTimeDate, endTimeDate, title, 0, extra, detail);
                     
                     //Write backupString to a file for persistent storage
                     string backupString = remList.returnAll();
@@ -856,9 +856,9 @@ namespace GetItDone
                         //add to first point in list
                         eventList.AddFirst(temp);
                         return 1;
-                    }
-                    j = 1;
+                    } 
                 }
+                j = 1;
             }
             if (j != 1)
             {
@@ -871,12 +871,8 @@ namespace GetItDone
                 return 1;
             }
         }
-        else
-        {
-            eventList.AddFirst(temp);
-            return 1;
-        }
-        return 1;  
+        eventList.AddFirst(temp);
+        return 1; 
     }
     public int addEvent(DateTime startTime, DateTime endTime, string title, int type, string extra, string detail)
     {
@@ -930,10 +926,10 @@ namespace GetItDone
                         eventList.AddFirst(temp);
                         return 1;
                     }
-                    j = 1;
                 }
+                j = 1;
             }
-            if (j != 1)
+            if (j == 1)
             {
                 //add to end of list and check the end time
                 if (!e.Current.checkRepeat(temp.getStart(), temp.getEnd()))
