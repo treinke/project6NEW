@@ -473,6 +473,7 @@ namespace GetItDone
             const int BACKUP_PORT = 7272;
             SocketClient client = new SocketClient();
             client.Connect(address, BACKUP_PORT);
+            client.Send("GetInfo|larry|pass");
             remList.Recreate(client.Receive());
             client.Close();
             //recreate the reminders and write to file
@@ -496,7 +497,8 @@ namespace GetItDone
             const int BACKUP_PORT = 7272;
             SocketClient client = new SocketClient();
             client.Connect(address, BACKUP_PORT);
-            client.Send("UpdateInfo|larry|pass|" + remList.returnAll());
+            client.Send("UpdateInfo|larry|pass|");
+            client.Send(remList.returnAll());
             client.Close();
             //delete local content after pushing to server
             /*Reminder rem;
